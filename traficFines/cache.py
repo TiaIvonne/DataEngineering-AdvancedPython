@@ -1,36 +1,27 @@
 # Ivonne Mendoza
 # ivonne@imendoza.io
 
-
-class Cache(str):
+from pathlib import Path
+class Cache:
     """
     Implementacion de la clase Cache
     """
-    def __init__(self):
-        self.__app_name = str
-        self.__cache_dir = str
-        self.__obsolescence = int
+    def __init__(self, app_name:str, obsolescence:int, cache_dir:str=None)->None:
+        self.__app_name = app_name
+        self.__cache_dir = cache_dir or str(Path.home() / ".my_cache" / app_name)
+        self.__obsolescence = obsolescence
 
-    def set(self, name:str, data:str)-> None:
-        pass
-    def exist(self, name:str)-> bool:
-        pass
-    def how_old(self, name:str)-> float:
-        pass
+    #@property is used to get the value of a private attribute without using any getter methods. \
+    #We have to put a line @property in front of the method where we return the private variable.
 
-    def delete(self, name:str)-> None:
-        pass
-    def clear(self)-> None:
-        pass
+    @property
+    def app_name(self)->str:
+        return self.__app_name
 
-class CacheUrl:
-    def get(self, url:str)-> str:
-        pass
-    def exist(self, url:str, **kwargs)-> bool:
-        pass
-    def load(self, url:str, **kwargs)-> str:
-        pass
-    def how_old(self, url:str,**kwargs)-> float:
-        pass
-    def delete(self, url:str, **kwargs)-> None:
-        pass
+    @property
+    def cache_dir(self)->str:
+        return self.__cache_dir
+
+    @property
+    def obsolescence(self)->int:
+        return self.__obsolescence
