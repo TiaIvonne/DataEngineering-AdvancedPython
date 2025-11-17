@@ -1,31 +1,52 @@
 # Ivonne Mendoza
 # ivonne@imendoza.io
+# Estilo https://realpython.com/documenting-python-code/
 
 from pathlib import Path
 import os
 import time
+
+# Constante
+CACHE_DIR = Path.home() / ".my_cache"
 
 class CacheError(Exception):
     """
     Implementa errores para la clase Cache
     """
     pass
-#todo: test this class
-#todo: test the methods
-#todo: test the properties
-#todo: test the exceptions
-#todo: test the cache directory
-#todo: test the cache file
-#todo: test the cache file path
-#todo: test the cache file content
 
 class Cache:
     """
     Implementacion de la clase Cache
+    Attributes:
+        app_name : str private
+            nombre del directorio donde se desea guardar archivos en cache
+        obsolescence : int private
+            numero de dias que un archivo en cache sigue siendo valido
+        cache_dir: str private
+            ruta completa del subdirectorio que se crea en .my_cache
+
+    Methods:
+        __get_file_path(name:str)-> Path
+            Obtiene la ruta del archivo
+        set(name:str, data:str)-> None
+            almacena datos en cache, escribe un archivo
+        exists(name:str)-> bool
+            comprueba si el archivo existe en cache
+        load(name:str)-> str
+            recupera los datos almacenados en cache
+        how_old(name:str)-> float
+            calcula la edad en milisegundos de un archivo
+        delete(name:str) -> None
+            elimina un archivo seleccionado en cache
+        clear()-> None
+            limpia todo el directorio seleccionado
+
+
     """
     def __init__(self, app_name:str, obsolescence:int, cache_dir:str=None)->None:
         self.__app_name = app_name
-        self.__cache_dir = cache_dir or str(Path.home() / ".my_cache" / app_name)
+        self.__cache_dir = cache_dir or str(CACHE_DIR/ app_name)
         self.__obsolescence = obsolescence
 
     #@property is used to get the value of a private attribute without using any getter methods. \
@@ -46,9 +67,9 @@ class Cache:
     def obsolescence(self)->int:
         return self.__obsolescence
 
-    # Metodo auxiliar privado que obtiene la ruta del archivo
     def __get_file_path(self, name:str)->Path:
         """
+        Metodo auxiliar privado que obtiene la ruta del archivo
         Retorna: /Users/ivonney/.my_cache/MadridFines/dic_2024.csv
         """
         return Path(self.__cache_dir) / name
