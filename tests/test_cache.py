@@ -22,7 +22,7 @@ def test_init_basic(cache_instance, temp_cache_dir):
 
 def test_init_basic_no_cache():
     """
-    Verificar si esta usando el directorio por defecto para la aplicacion real
+    Test 2: Verificar si esta usando el directorio por defecto para la aplicacion real
     No usa fixture, crea una instancia propia para comprobar el directorio base
     """
     app_name = "MiApp"
@@ -38,7 +38,7 @@ Se debe testear en un metodo publico que lo use
 '''
 def test_creates_file_correct(cache_instance, temp_cache_dir):
     """
-    Verifica que set() crea el archivo en la ruta correcta
+    Test 3Verifica que set() crea el archivo en la ruta correcta
     """
 
     # Preparar el ambiente de prueba
@@ -56,14 +56,23 @@ def test_creates_file_correct(cache_instance, temp_cache_dir):
 
 # Se deben testear los atributos de la clase, son privados pero con @property accedemos a ellos
 def test_property_app_name(cache_instance):
+    """
+    Test 4: Verifica que el atributo app_name es el correcto
+    """
     assert cache_instance.app_name == "TestApp"
     assert isinstance(cache_instance.app_name, str)
 
 def test_property_cache_dir(cache_instance, temp_cache_dir):
+    """
+    Test 5: Verifica que el atributo cache_dir es el correcto
+    """
     assert cache_instance.cache_dir == temp_cache_dir
     assert isinstance(cache_instance.cache_dir, str)
 
 def test_property_obsolescence(cache_instance):
+    """
+    Test 6: Verifica que el atributo obsolescence es el correcto
+    """
     assert cache_instance.obsolescence == 7
     assert isinstance(cache_instance.obsolescence, int)
 
