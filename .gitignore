@@ -57,7 +57,7 @@ ENV/
 Thumbs.db
 
 # Proyecto específico
-tarea-notebook/
+notebooks/
 *.png
 *.html
 *.ipynb_checkpoints
